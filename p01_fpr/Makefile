@@ -67,13 +67,12 @@ remake :
 	@ make
 
 git:
-	@if [ -z "$(filter-out $@,$(MAKECMDGOALS))" ]; then \
-		echo "Please provide a commit message"; \
+	@if [ -z "$(m)" ]; then \
+		echo "Please provide a commit message by running: make git m=\"Your message\""; \
 		exit 1; \
 	fi
 	@git add .
-	@git commit -m "$(filter-out $@,$(MAKECMDGOALS))"
+	@git commit -m "$(m)"
 	@git push
 
 
-	
