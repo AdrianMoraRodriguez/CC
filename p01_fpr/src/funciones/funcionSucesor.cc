@@ -25,10 +25,16 @@ int FuncionSucesor::operar(int x, int y) const {
 }
 
 int FuncionSucesor::operar(int x) const {
+  incrementarContador();
   return x + 1;
 }
 
 int FuncionSucesor::operar(std::vector<int> x, int y, int length) const {
   std::cout << "Sucesor no posible con vector" << std::endl;
+  exit(1);
+}
+
+int FuncionSucesor::operar(int x, int y, FRP* function) const {
+  std::cout << "Sucesor no posible con función" << std::endl;
   exit(1);
 }

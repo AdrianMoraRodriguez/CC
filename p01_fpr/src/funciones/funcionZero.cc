@@ -25,10 +25,16 @@ int FuncionZero::operar(int x, int y) const {
 }
 
 int FuncionZero::operar(int x) const {
+  incrementarContador();
   return 0;
 }
 
 int FuncionZero::operar(std::vector<int> x, int y, int length) const {
   std::cout << "Zero no posible con vector" << std::endl;
+  exit(1);
+}
+
+int FuncionZero::operar(int x, int y, FRP* function) const {
+  std::cout << "Zero no posible con función" << std::endl;
   exit(1);
 }

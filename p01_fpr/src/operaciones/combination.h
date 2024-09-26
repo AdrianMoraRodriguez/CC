@@ -1,14 +1,10 @@
-
-
-#pragma once
-
-#include <vector>
-
 #include "operation.h"
 
-class Composition: public Operation {
+
+class Combination: public Operation {
   public:
-    Composition(FRP* left_function, FRP* right_function): Operation(left_function, right_function) {}
+    Combination(FRP* left_function, FRP* right_function): Operation(left_function, right_function) {}
+    Combination() {}
     int operar(int x, int y) const override;
     int operar(std::vector<int> x, int y, int length) const override;
     int operar(int x) const override;

@@ -29,10 +29,16 @@ int FuncionProyeccion::operar(int x) const {
   exit(1);
 }
 
-int FuncionProyeccion::operar(std::vector<int> x, int y, , int length) const {
+int FuncionProyeccion::operar(std::vector<int> x, int y, int length) const {
   if (y >= length) {
     std::cout << "Proyección no posible con y mayor que la longitud del vector" << std::endl;
     exit(1);
   }
+  incrementarContador();
   return x[y];
+}
+
+int FuncionProyeccion::operar(int x, int y, FRP* function) const {
+  std::cout << "Proyección no posible con función" << std::endl;
+  exit(1);
 }

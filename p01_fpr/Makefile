@@ -1,4 +1,4 @@
-CXX_FLAGS := -std=c++17 -g -Ofast -w # Quitar -Ofast para debug y -w para los warnings
+CXX_FLAGS := -std=c++17 -g -w #-Ofast # Quitar -Ofast para debug y -w para los warnings
 PRE_FLAGS := -MMD -MP
 
 # Project directory structure
@@ -63,7 +63,7 @@ tarclean:
 
 remake :
 	@ make clean
-	@ rm build/*
+	@ rm -rf build
 	@ make
 
 git:

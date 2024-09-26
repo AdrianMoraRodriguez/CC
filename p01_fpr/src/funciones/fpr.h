@@ -18,8 +18,8 @@
 
 class FRP {
   public:
-    virtual int operar(int x, int y = 0) const = 0;
-    virtual int operar(std::vector<int> x, int y = 0, int length) const = 0;
+    virtual int operar(int x, int y) const = 0;
+    virtual int operar(std::vector<int> x, int y, int length) const = 0;
     virtual int operar(int x) const = 0;
     virtual int operar(int x, int y, FRP* function) const = 0;
     static void resetContador() { contador = 0; }
@@ -28,5 +28,3 @@ class FRP {
   protected:
     static void incrementarContador() { contador++; }
 };
-
-int Operacion::contador = 0;
