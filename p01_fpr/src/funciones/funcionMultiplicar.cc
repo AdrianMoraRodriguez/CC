@@ -6,7 +6,6 @@
 #include "../operaciones/composition.h"
 
 int FunctionMultiplicar::operar(int x, int y) const {
-  incrementarContador();
   if (y == 0) {
     FRP* function = new FuncionZero();
     FRP* function1 = new FuncionProyeccion();

@@ -23,7 +23,6 @@ int FunctionHMultiplicar::operar(int x) const {
 }
 
 int FunctionHMultiplicar::operar(int x, int y, FRP* function) const {
-  incrementarContador();
   std::vector<int> vector;
   vector.push_back(x);
   vector.push_back(y);

@@ -23,6 +23,7 @@ class FRP {
     virtual int operar(int x) const = 0;
     virtual int operar(int x, int y, FRP* function) const = 0;
     static void resetContador() { contador = 0; }
+    static int getContador() { return contador; }
   private:
     static int contador;
   protected:

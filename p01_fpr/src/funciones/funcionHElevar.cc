@@ -23,7 +23,6 @@ int FunctionHElevar::operar(int x) const {
 }
 
 int FunctionHElevar::operar(int x, int y, FRP* function) const {
-  incrementarContador();
   std::vector<int> vector;
   vector.push_back(x);
   vector.push_back(y);

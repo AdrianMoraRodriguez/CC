@@ -8,7 +8,6 @@
 #include "../operaciones/composition.h"
 
 int FunctionSuma::operar(int x, int y) const {
-  incrementarContador();
   if (y == 0) {
     FRP* function = new FuncionProyeccion();
     return function->operar(std::vector<int>{x}, 0, 1);
