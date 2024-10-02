@@ -6,9 +6,11 @@
 
 int main() {
   FunctionSuma suma;
-  std::cout << "Introduzca dos números enteros: ";
+  std::cout << "Introduzca la base (debe ser un entero positivo): ";
   int x, y;
-  std::cin >> x >> y;
+  std::cin >> x;
+  std::cout << "Introduzca el exponente (debe ser un entero positivo): ";
+  std::cin >> y;
   if (x < 0 || y < 0) {
     std::cout << "Los números deben ser enteros positivos" << std::endl;
     return 1;
