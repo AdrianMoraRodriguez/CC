@@ -8,17 +8,20 @@
 
 class Node {
  public:
-  Node(std::string name) {} 
+  Node() {}
+  Node(std::string name) {
+    name_ = name;
+  } 
   Node(std::string name, bool isFinal) {
     isFinal_ = isFinal;
-    this->name_ = name;
+    name_ = name;
   }
   Node(std::string name, std::vector<Transition> transitions) {
-    this->transitions_ = transitions;
+    transitions_ = transitions;
   }
   Node(std::string name, std::vector<Transition> transitions, bool isFinal) {
-    this->transitions_ = transitions;
-    this->isFinal_ = isFinal;
+    transitions_ = transitions;
+    isFinal_ = isFinal;
   }
   void addTransition(Transition transition) {
     transitions_.push_back(transition);
@@ -38,6 +41,29 @@ class Node {
 
   bool isFinal() {
     return isFinal_;
+  }
+
+  std::vector<Transition> getTransitions(char symbol, char stack_symbol) {
+    std::vector<Transition> result;
+    for (Transition transition : transitions_) {
+      if (transition.getSymbol() == symbol && transition.getStackSymbolConsumed() == stack_symbol) {
+        result.push_back(transition);
+      } else if (transition.getSymbol() == '.' && transition.getStackSymbolConsumed() == stack_symbol) {
+        result.push_back(transition);
+      }
+    }
+    return result;
+  }
+
+  //Sobrecarga de operador para imprimir el nodo
+  friend std::ostream& operator<<(std::ostream& os, const Node& node) {
+    os << "Node: " << node.name_ << std::endl;
+    os << "Transitions: " << std::endl;
+    for (Transition transition : node.transitions_) {
+      os << transition;
+      os << "----------------" << std::endl;
+    }
+    return os;
   }
  private:
   std::vector<Transition> transitions_;
