@@ -1,0 +1,15 @@
+#include <vector>
+#include <string>
+
+std::vector<std::string> split(std::string str, char delimiter) {
+  std::vector<std::string> result;
+  for (int i = 0; i < str.size(); i++) {
+    std::string word = "";
+    while (str[i] != delimiter && i < str.size()) {
+      word += str[i];
+      i++;
+    }
+    result.push_back(word);
+  }
+  return result;
+}
