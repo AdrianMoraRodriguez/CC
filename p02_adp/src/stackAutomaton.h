@@ -38,6 +38,7 @@ class StackAutomaton {
   void makeStates(std::vector<std::string> states_names);
   void makeFinalStates(std::vector<std::string> final_states);
   void pushStack(std::string stack_symbols);
+  void analize(std::string input);
   bool evaluatePrivate(std::string input, Node current_node, int i);
   std::stack<char> stack_;
   char startingStackSymbol_;
