@@ -13,7 +13,7 @@ class StackAutomaton {
  public:
   StackAutomaton() {}
   void makeAutomaton(std::string filename);
-  bool evaluate(std::string input);
+  bool evaluate(std::string input, bool trace);
   void printAutomaton() {
     for (Node node : states_) {
       std::cout << node << std::endl;
@@ -40,7 +40,7 @@ class StackAutomaton {
   void makeFinalStates(std::vector<std::string> final_states);
   void pushStack(std::string stack_symbols);
   void analize(std::string input);
-  bool evaluatePrivate(std::string input, Node current_node, int i);
+  bool evaluatePrivate(std::string input, Node current_node, int i, bool trace);
   Stack stack_;
   char startingStackSymbol_;
   std::vector<Node> states_;

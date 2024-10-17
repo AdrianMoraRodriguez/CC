@@ -107,19 +107,30 @@ void StackAutomaton::analize(std::string input) {
   }
 }
 
-bool StackAutomaton::evaluate(std::string input) {
+bool StackAutomaton::evaluate(std::string input, bool trace) {
   try {
     analize(input);
     initializeStack();
-    return evaluatePrivate(input, startState_, 0);
+    return evaluatePrivate(input, startState_, 0, trace);
   } catch (std::invalid_argument& e) {
     std::cerr << e.what() << std::endl;
     return false;
   }
 }
 
-bool StackAutomaton::evaluatePrivate(std::string input, Node current_node, int i) {
+bool StackAutomaton::evaluatePrivate(std::string input, Node current_node, int i, bool trace) {
   std::vector<Transition> transitions = current_node.getTransitions(input[i], stack_.top());
+  if (trace) {
+    std::cout << "Current node: " << current_node.getName() << std::endl;
+    if (input.substr(i) == "") {
+      std::cout << "Current input: ." << std::endl;
+    } else {
+      std::cout << "Current input: " << input.substr(i) << std::endl;
+    }
+    std::cout << "Current stack: ";
+    stack_.printStack();
+    std::cout << "------------------------" << std::endl;
+  } 
   for (Transition transition : transitions) {
     Stack stack_copy = stack_;
     if (transition.getStackSymbolConsumed() == '.') {
@@ -130,11 +141,11 @@ bool StackAutomaton::evaluatePrivate(std::string input, Node current_node, int i
       pushStack(transition.getStackSymbolProduced());
     }
     if (transition.getSymbol() == '.') {
-      if (evaluatePrivate(input, findNode(transition.getNextNodeName()), i)) {
+      if (evaluatePrivate(input, findNode(transition.getNextNodeName()), i, trace)) {
         return true;
       }
     } else {
-      if (evaluatePrivate(input, findNode(transition.getNextNodeName()), i + 1)) {
+      if (evaluatePrivate(input, findNode(transition.getNextNodeName()), i + 1, trace)) {
         return true;
       }
     }
