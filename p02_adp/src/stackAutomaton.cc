@@ -121,7 +121,7 @@ bool StackAutomaton::evaluate(std::string input) {
 bool StackAutomaton::evaluatePrivate(std::string input, Node current_node, int i) {
   std::vector<Transition> transitions = current_node.getTransitions(input[i], stack_.top());
   for (Transition transition : transitions) {
-    std::stack<char> stack_copy = stack_;
+    Stack stack_copy = stack_;
     if (transition.getStackSymbolConsumed() == '.') {
       throw std::invalid_argument("Transition must consume a stack symbol");
     }

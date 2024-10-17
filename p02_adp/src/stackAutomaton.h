@@ -5,6 +5,7 @@
 
 #include "node.h"
 #include "transition.h"
+#include "stack.h"
 
 #pragma once
 
@@ -40,7 +41,7 @@ class StackAutomaton {
   void pushStack(std::string stack_symbols);
   void analize(std::string input);
   bool evaluatePrivate(std::string input, Node current_node, int i);
-  std::stack<char> stack_;
+  Stack stack_;
   char startingStackSymbol_;
   std::vector<Node> states_;
   Node startState_;
