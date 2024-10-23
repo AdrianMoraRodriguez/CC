@@ -17,6 +17,9 @@ std::vector<std::string> split(std::string str, char delimiter) {
 
 std::vector<std::string> getImportantLines(std::string filename) {
   std::ifstream file(filename);
+  if (!file.is_open()) {
+    throw std::invalid_argument("File not found");
+  }
   std::string line;
   std::vector<std::string> important_lines;
   while (std::getline(file, line)) {

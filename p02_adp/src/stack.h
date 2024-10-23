@@ -12,6 +12,9 @@ class Stack {
     stack_.push(symbol);
   }
   char pop() {
+    if (stack_.empty()) {
+      return '.';
+    }
     char symbol = stack_.top();
     stack_.pop();
     return symbol;

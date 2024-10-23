@@ -119,7 +119,12 @@ bool StackAutomaton::evaluate(std::string input, bool trace) {
 }
 
 bool StackAutomaton::evaluatePrivate(std::string input, Node current_node, int i, bool trace) {
-  std::vector<Transition> transitions = current_node.getTransitions(input[i], stack_.top());
+  std::vector<Transition> transitions;
+  if (stack_.empty()) {
+    return (current_node.isFinal() && i > input.size() - 1);
+  } else {
+    transitions = current_node.getTransitions(input[i], stack_.top());
+  }
   if (trace) {
     std::cout << "Current node: " << current_node.getName() << std::endl;
     if (input.substr(i) == "") {

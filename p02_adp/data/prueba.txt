@@ -1,0 +1,19 @@
+# Autómata que acepta wcw^T (cadena c cadena transpuesta)
+s s2 p r
+a b c
+S A B
+s
+S
+r
+s a S s2 AS
+s b S s2 BS
+s . S r .
+s2 a A s2 AA
+s2 a B s2 AB
+s2 b B s2 BB
+s2 b A s2 BA
+s2 c A p A
+s2 c B p B
+p a A p .
+p b B p .
+p . S r .
