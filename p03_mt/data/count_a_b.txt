@@ -1,0 +1,17 @@
+q0 qb qpa qa qf
+a b
+a b 0 1 .
+q0
+.
+qf
+2
+q0 b . qb b R 1 R
+q0 a . q0 a R . S
+q0 . . qpa . S 0 R
+qb b . qb b R 1 R
+qb a . qb a R . S
+qb . . qpa . S . S
+qpa . . qa . L . R
+qa a . qa a L 1 R
+qa b . qa b L . S
+qa . . qf . S . S
