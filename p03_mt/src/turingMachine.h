@@ -35,6 +35,7 @@ class turingMachine {
   void analize(std::string input);
   void initializeTapes(std::string input, int tapes);
   void printTapes();
+  void checkAlphabet();
   std::vector<char> readTapes();
 
   char blank_symbol_;

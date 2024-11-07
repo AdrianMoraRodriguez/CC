@@ -1,4 +1,4 @@
-q0 qb qpa qa qf
+q0 qb qpa qa qL qLL qLLL qf
 a b
 a b 0 1 .
 q0
@@ -12,6 +12,12 @@ qb b . qb b R 1 R
 qb a . qb a R . S
 qb . . qpa . S . S
 qpa . . qa . L . R
-qa a . qa a L 1 R
-qa b . qa b L . S
-qa . . qf . S . S
+qa a . qa . L 1 R
+qa b . qa . L . S
+qa . . qL . S . S
+qL . . qL . S . L
+qL . 1 qLL 1 L 1 L
+qLL . 1 qLL 1 L 1 L
+qLL . . qLLL . L . L
+qLLL . 1 qLLL 1 L 1 L
+qLLL . 0 qLLL 0 L 0 L

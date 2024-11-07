@@ -48,6 +48,17 @@ void turingMachine::makeFinalStates(std::vector<std::string> final_states) {
   }
 }
 
+void turingMachine::checkAlphabet() {
+  for (char symbol : alphabet_) {
+    if (std::find(tapeAlphabet_.begin(), tapeAlphabet_.end(), symbol) == tapeAlphabet_.end()) {
+      throw std::invalid_argument("Symbol " + std::string(1,symbol) + " in alphabet not in tape alphabet");
+    }
+  }
+  if (std::find(tapeAlphabet_.begin(), tapeAlphabet_.end(), blank_symbol_) == tapeAlphabet_.end()) {
+    throw std::invalid_argument("Blank symbol not in tape alphabet");
+  }
+}
+
 void turingMachine::makeMachine(std::string filename) {
   std::vector<std::string> important_lines = getImportantLines(filename);
   makeStates(split(important_lines[0], ' '));
@@ -55,7 +66,9 @@ void turingMachine::makeMachine(std::string filename) {
   makeTapeAlphabet(split(important_lines[2], ' '));
   std::string start_state = important_lines[3];
   char blank_symbol = important_lines[4][0];
-  tapeAlphabet_.push_back(blank_symbol);
+  if (std::find(tapeAlphabet_.begin(), tapeAlphabet_.end(), blank_symbol) == tapeAlphabet_.end()) {
+    throw std::invalid_argument("Blank symbol not in tape alphabet");
+  }
   if (std::find(alphabet_.begin(), alphabet_.end(), blank_symbol) != alphabet_.end()) {
     throw std::invalid_argument("Blank symbol " + std::string(1,blank_symbol) + " cannot be in the alphabet");
   }
@@ -100,6 +113,7 @@ void turingMachine::makeMachine(std::string filename) {
   }
   startState_ = findNode(start_state);
   blank_symbol_ = blank_symbol;
+  checkAlphabet();
 }
 
 
@@ -135,7 +149,12 @@ void turingMachine::printTapes() {
 }
 
 bool turingMachine::evaluate(std::string input, bool trace) {
-  analize(input);
+  try {
+    analize(input);
+  } catch (std::invalid_argument& e) {
+    std::cout << e.what() << std::endl;
+    return false;
+  }
   initializeTapes(input, tapes_.size());
   Node current_node = startState_;
   std::vector<Transition> transitions;
@@ -161,44 +180,3 @@ bool turingMachine::evaluate(std::string input, bool trace) {
   printTapes();
   return current_node.isFinal();
 }
-
-// bool turingMachine::evaluatePrivate(std::string input, Node current_node, int i, bool trace) {
-//   std::vector<Transition> transitions;
-//   if (stack_.empty()) {
-//     return (current_node.isFinal() && i > input.size() - 1);
-//   } else {
-//     transitions = current_node.getTransitions(input[i], stack_.top());
-//   }
-//   if (trace) {
-//     std::cout << "Current node: " << current_node.getName() << std::endl;
-//     if (input.substr(i) == "") {
-//       std::cout << "Current input: ." << std::endl;
-//     } else {
-//       std::cout << "Current input: " << input.substr(i) << std::endl;
-//     }
-//     std::cout << "Current stack: ";
-//     stack_.printStack();
-//     std::cout << "------------------------" << std::endl;
-//   } 
-//   for (Transition transition : transitions) {
-//     Stack stack_copy = stack_;
-//     if (transition.getStackSymbolConsumed() == '.') {
-//       throw std::invalid_argument("Transition must consume a stack symbol");
-//     }
-//     stack_.pop();
-//     if (transition.getStackSymbolProduced() != ".") {
-//       pushStack(transition.getStackSymbolProduced());
-//     }
-//     if (transition.getSymbol() == '.') {
-//       if (evaluatePrivate(input, findNode(transition.getNextNodeName()), i, trace)) {
-//         return true;
-//       }
-//     } else {
-//       if (evaluatePrivate(input, findNode(transition.getNextNodeName()), i + 1, trace)) {
-//         return true;
-//       }
-//     }
-//     stack_ = stack_copy;
-//   }
-//   return (current_node.isFinal() && i > input.size() - 1);
-// }
